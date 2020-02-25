@@ -12,5 +12,15 @@ before { puts "Parameters: #{params}" }                                     #
 after { puts; }                                                             #
 #############################################################################
 
-events_table = DB.from(:events)
-rsvps_table = DB.from(:rsvps)
+events_table = DB.from(:events) #creates variable called events_table
+rsvps_table = DB.from(:rsvps) #creates variable called rsvps_table
+
+get "/" do
+    puts events_table.all
+    @events = events_table.all #creates an array of hashes that represents the events table
+    view "events"
+end
+
+get "/events/:id" do #creates events detail page route : makes it a placeholder for id
+    puts params[:id]
+end

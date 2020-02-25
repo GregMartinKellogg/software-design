@@ -3,15 +3,15 @@ require "sequel"                                                       #
 DB = Sequel.connect "sqlite://#{Dir.pwd}/development.sqlite3"          #
 ########################################################################  
 
-# Database schema - this should reflect your domain model
-DB.create_table! :events do
+# Database schema - this should reflect your domain model see the slides for domain model
+DB.create_table! :events do #creates events table
   primary_key :id
   String :title
   String :description, text: true
   String :date
   String :location
 end
-DB.create_table! :rsvps do
+DB.create_table! :rsvps do #creates rsvps table
   primary_key :id
   foreign_key :event_id
   Boolean :going
@@ -23,6 +23,7 @@ end
 # Insert initial (seed) data
 events_table = DB.from(:events)
 
+#passes hash tables into sequal
 events_table.insert(title: "Bacon Burger Taco Fest", 
                     description: "Here we go again bacon burger taco fans, another Bacon Burger Taco Fest is here!",
                     date: "June 21",
