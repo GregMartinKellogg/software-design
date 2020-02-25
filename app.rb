@@ -22,5 +22,11 @@ get "/" do
 end
 
 get "/events/:id" do #creates events detail page route : makes it a placeholder for id
-    puts params[:id]
+    @event = events_table.where(id: params[:id]).first #creates a hash from events_table for a single event
+    view "event"
+end
+
+get "/events/:id/rsvps/new" do #creates a form for the event identified by id to input an rsvp
+    @event = events_table.where(id: params[:id]).first #creates a hash from events_table for a single event
+    view "new_rsvp"
 end
